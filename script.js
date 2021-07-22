@@ -47,7 +47,7 @@ const render = () => {
     content.removeChild(content.firstChild);
   }
   tasks = _.sortBy(tasks, 'isDone');
-  // sortTasks();
+  
   tasks.map((item, index) => {
     container = document.createElement('div');
     container.id = `task ${index}`;
@@ -123,16 +123,3 @@ const funcCheck = (index) => {
   localStorage.setItem('tasks', JSON.stringify(tasks));
   render();
 }
-
-
-// const sortTasks = () => {
-//   for (let i = 0; i < tasks.length; i++) {
-//     for (let j = 1; j < tasks.length; j++) {
-//       if (+tasks[j - 1].isDone > +tasks[j].isDone) {
-//         let c = tasks[j];
-//         tasks[j] = tasks[j - 1];
-//         tasks[j - 1] = c;
-//       }
-//     }
-//   }
-// }
