@@ -24,11 +24,11 @@ window.onload = () => {
   
 
 }
-writeTask = (event) => {
+const writeTask = (event) => {
   task = event.target.value;
 }
 
-addTask = (event) => {
+const addTask = (event) => {
   if (task.length != 0) {
     tasks.push({
       text: task,
