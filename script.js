@@ -41,7 +41,7 @@ const addTask = (event) => {
   render();
 }
 
-render = () => {
+const render = () => {
   content = document.getElementById('add-tasks');
   while (content.firstChild) {
     content.removeChild(content.firstChild);
@@ -95,13 +95,13 @@ render = () => {
 
 }
 
-funcEdit = (event, index) => {
+const funcEdit = (event, index) => {
   indexTask = index;
   count++;
   render();
 }
 
-changeTask = (event, index) => {
+const changeTask = (event, index) => {
 
   if (event.target.value.length != 0) {
     tasks[index].text = event.target.value;
@@ -111,20 +111,20 @@ changeTask = (event, index) => {
   render();
 }
 
-funcDel = (index) => {
+const funcDel = (index) => {
   tasks.splice(index, 1);
   localStorage.setItem('tasks', JSON.stringify(tasks));
   render();
 }
 
-funcCheck = (index) => {
+const funcCheck = (index) => {
   tasks[index].isDone = !tasks[index].isDone;
   localStorage.setItem('tasks', JSON.stringify(tasks));
   render();
 }
 
 
-sortTasks = () => {
+const sortTasks = () => {
   for (let i = 0; i < tasks.length; i++) {
     for (let j = 1; j < tasks.length; j++) {
       if (+tasks[j - 1].isDone > +tasks[j].isDone) {
