@@ -1,0 +1,144 @@
+body {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: linear-gradient(to bottom, powderblue, pink);
+  background-repeat: no-repeat;
+}
+
+.header {
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(13, 0, 59);
+}
+
+.main {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.main input {
+  font-size: 1rem;
+  padding: 8px;
+  width: 80%;
+  color: rgb(13, 0, 59);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: 600;
+  outline: none;
+  border: 0;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
+}
+
+.main button {
+  width: 35px;
+  height: 35px;
+  background-image: url("icons8-бумажный-самолетик-64.png");
+  overflow: visible;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 30px;
+  background-color: rgba(255, 255, 255, 0.3);
+  outline: none;
+  border: 0;
+  cursor: pointer;
+  margin: 5px;
+  margin-top: 0;
+  margin-right: 0;
+  border-radius: 50%;
+}
+
+#add-tasks {
+  background-repeat: no-repeat;
+  background-color: rgba(255, 255, 255, 0.3);
+  margin-top: 20px;
+  border-radius: 10px;
+  /* width: 100%; */
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px;
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar{
+  background:  rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #fd8ea0a1;
+  border-radius: 10px;
+}
+
+p {
+  font-size: 1rem;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: 600;
+  margin-block-end: 0;
+  margin-block-start: 0;
+  color:rgb(13, 0, 59);
+}
+.done-text{
+  text-decoration: line-through;
+  color: rgb(84, 84, 141);
+}
+
+.task {
+  height: 34px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  /* overflow: scroll; */
+}
+.task p{
+  overflow-y: scroll;
+  width: 65%;
+}
+.task:hover{
+  /* background-color: rgba(176, 224, 230, 0.781); */
+  background-color: rgba(100, 148, 237, 0.589);
+  border-radius: 20px;
+}
+
+.task input[type='text']{
+  width: 60%;
+  font-size: 1rem;
+  padding: 0px 8px;
+  /* width: 300px; */
+  color: rgb(13, 0, 59);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: 600;
+  outline: none;
+  border: 0;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
+  overflow: scroll;
+}
+
+
+input[type='checkbox'] {
+  cursor: pointer;
+  zoom: 1.5;
+}
+img{
+  width: 25px;
+  height: 25px;
+  margin: 2px;
+  /* background-color: rgba(255, 255, 255, 0.3); */
+  /* border-radius: 50%; */
+  object-fit: cover;
+  cursor: pointer;
+}
