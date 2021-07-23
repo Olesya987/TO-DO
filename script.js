@@ -14,7 +14,7 @@ let indexTask2 = null;
 let count = 0;
 let task = '';
 
-window.onload = async ()=> {
+window.onload = async () => {
   input = document.getElementById('input-task');
   button = document.getElementById('button-task');
   const response = await fetch('http://localhost:8000/allTasks', {
@@ -109,7 +109,7 @@ const funcEdit = async (event, index) => {
 }
 
 const changeTask = async (event, index) => {
-  const{id}=tasks[index];
+  const { id } = tasks[index];
   if (event.target.value.length != 0) {
     const resp = await fetch('http://localhost:8000/updateTask', {
       method: 'PATCH',
@@ -141,7 +141,7 @@ const funcDel = async (index) => {
 }
 
 const funcCheck = async (index) => {
-  const{id, isCheck }=tasks[index];
+  const { id, isCheck } = tasks[index];
   const resp = await fetch('http://localhost:8000/updateTask', {
     method: 'PATCH',
     headers: {
