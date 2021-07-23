@@ -21,7 +21,7 @@ window.onload = async function init() {
   const response = await fetch('http://localhost:8000/allTasks', {
     method: 'GET'
   });
-  let result = await response.json();
+  const result = await response.json();
   tasks = result.data;
   input.addEventListener('change', writeTask);
   button.addEventListener('click', addTask);
@@ -36,11 +36,6 @@ const writeTask = async (event) => {
 
 const addTask = async (event) => {
   if (task.length != 0) {
-    // tasks.push({
-    //   text: task,
-    //   isCheck: false
-    // });
-
     const resp = await fetch('http://localhost:8000/createTask', {
       method: 'POST',
       headers: {
@@ -52,7 +47,7 @@ const addTask = async (event) => {
         isCheck: false
       })
     });
-    let result = await resp.json();
+    const result = await resp.json();
     tasks = result.data;
     task = '';
     input.value = '';
@@ -126,7 +121,6 @@ const funcEdit = async (event, index) => {
 const changeTask = async (event, index) => {
 
   if (event.target.value.length != 0) {
-    // tasks[index].text = event.target.value;
     const resp = await fetch('http://localhost:8000/updateTask', {
       method: 'PATCH',
       headers: {
@@ -138,7 +132,7 @@ const changeTask = async (event, index) => {
         text: event.target.value
       })
     });
-    let result = await resp.json();
+    const result = await resp.json();
     tasks = result.data;
     indexTask2 = null;
     localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -151,9 +145,8 @@ const funcDel = async (index) => {
   const resp = await fetch(`http://localhost:8000/deleteTask?id=${tasks[index].id}`, {
     method: 'DELETE'
   });
-  let result = await resp.json();
+  const result = await resp.json();
   tasks = result.data;
-  // tasks.splice(index, 1);
   localStorage.setItem('tasks', JSON.stringify(tasks));
   render();
 }
@@ -171,8 +164,7 @@ const funcCheck = async (index) => {
       isCheck: !tasks[index].isCheck
     })
   });
-  // tasks[index].isCheck = !tasks[index].isCheck;
-  let result = await resp.json();
+  const result = await resp.json();
   tasks = result.data;
   localStorage.setItem('tasks', JSON.stringify(tasks));
   render();
