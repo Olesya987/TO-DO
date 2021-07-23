@@ -14,10 +14,9 @@ let indexTask2 = null;
 let count = 0;
 let task = '';
 
-window.onload = async function init() {
+window.onload = async ()=> {
   input = document.getElementById('input-task');
   button = document.getElementById('button-task');
-
   const response = await fetch('http://localhost:8000/allTasks', {
     method: 'GET'
   });
@@ -26,9 +25,6 @@ window.onload = async function init() {
   input.addEventListener('change', writeTask);
   button.addEventListener('click', addTask);
   render();
-
-
-
 }
 const writeTask = async (event) => {
   task = event.target.value;
@@ -52,7 +48,6 @@ const addTask = async (event) => {
     task = '';
     input.value = '';
   }
-
   localStorage.setItem('tasks', JSON.stringify(tasks));
   render();
 }
@@ -63,7 +58,6 @@ const render = async () => {
     content.removeChild(content.firstChild);
   }
   tasks = _.sortBy(tasks, 'isCheck');
-
   tasks.map((item, index) => {
     container = document.createElement('div');
     container.id = `task ${index}`;
@@ -80,22 +74,19 @@ const render = async () => {
     input2 = document.createElement('input');
     input2.type = 'text';
     input2.value = item.text;
-    if (index === indexTask && (indexTask != indexTask2 || count == 2)) {
+    if (index === indexTask && (indexTask != indexTask2 || count === 2)) {
       container.appendChild(input2);
       count = 0;
       indexTask2 = indexTask;
       input2.addEventListener('change', (e) => changeTask(e, index));
-
       indexTask = null;
     } else container.appendChild(text);
     container.className = 'task';
     div = document.createElement('div');
-
     imgDel = document.createElement('img');
     imgDel.src = 'icons8-удалить-64.png';
     imgEdit = document.createElement('img');
     imgEdit.src = 'icons8-редактировать-64.png';
-
     imgDel.onclick = function () {
       funcDel(index);
     }
@@ -104,7 +95,6 @@ const render = async () => {
       div.removeChild(imgEdit);
     }
     container.appendChild(div);
-
     content.appendChild(container);
     imgEdit.addEventListener('click', (e) => funcEdit(e, index));
     localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -119,7 +109,7 @@ const funcEdit = async (event, index) => {
 }
 
 const changeTask = async (event, index) => {
-
+  const{id}=tasks[index];
   if (event.target.value.length != 0) {
     const resp = await fetch('http://localhost:8000/updateTask', {
       method: 'PATCH',
@@ -128,7 +118,7 @@ const changeTask = async (event, index) => {
         'Access-Control-Allow-Origin': '*'
       },
       body: JSON.stringify({
-        id: tasks[index].id,
+        id,
         text: event.target.value
       })
     });
@@ -138,7 +128,6 @@ const changeTask = async (event, index) => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
     render();
   }
-
 }
 
 const funcDel = async (index) => {
@@ -152,7 +141,7 @@ const funcDel = async (index) => {
 }
 
 const funcCheck = async (index) => {
-
+  const{id, isCheck }=tasks[index];
   const resp = await fetch('http://localhost:8000/updateTask', {
     method: 'PATCH',
     headers: {
@@ -160,8 +149,8 @@ const funcCheck = async (index) => {
       'Access-Control-Allow-Origin': '*'
     },
     body: JSON.stringify({
-      id: tasks[index].id,
-      isCheck: !tasks[index].isCheck
+      id,
+      isCheck: !isCheck
     })
   });
   const result = await resp.json();
