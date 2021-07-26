@@ -1,4 +1,4 @@
-// JSON.parse(localStorage.getItem("tasks")) || 
+// JSON.parse(localStorage.getItem("tasks")) ||
 let tasks = [];
 let button = null;
 let input = null;
@@ -19,12 +19,10 @@ window.onload = async () => {
   input = document.getElementById("input-task");
   button = document.getElementById("button-task");
   const response = await fetch("http://localhost:8000/get", {
-    method: "GET"
+    method: "GET",
   });
-  // console.log(response);
   const result = await response.json();
   tasks = result.tasks;
-  // console.log(result.tasks);
   input.addEventListener("change", writeTask);
   button.addEventListener("click", addTask);
   render();
@@ -42,7 +40,7 @@ const addTask = async (event) => {
       },
       body: JSON.stringify({
         text: task,
-        isCheck: false
+        isCheck: false,
       }),
     });
     const result = await resp.json();
@@ -50,7 +48,6 @@ const addTask = async (event) => {
     task = "";
     input.value = "";
   }
-  // localStorage.setItem("tasks", JSON.stringify(tasks));
   render();
 };
 const render = async () => {
@@ -98,7 +95,6 @@ const render = async () => {
     container.appendChild(div);
     content.appendChild(container);
     imgEdit.addEventListener("click", (e) => funcEdit(e, index));
-    // localStorage.setItem("tasks", JSON.stringify(tasks));
   });
 };
 const funcEdit = async (event, index) => {
@@ -117,31 +113,26 @@ const changeTask = async (event, index) => {
       },
       body: JSON.stringify({
         _id,
-        text: event.target.value
+        text: event.target.value,
       }),
     });
     const result = await resp.json();
     tasks = result.tasks;
     indexTask2 = null;
-    // localStorage.setItem("tasks", JSON.stringify(tasks));
     render();
   }
 };
 const funcDel = async (index) => {
-  const resp = await fetch(
-    `http://localhost:8000/del?id=${tasks[index]._id}`,
-    {
-      method: "DELETE",
-    }
-  );
+  const resp = await fetch(`http://localhost:8000/del?id=${tasks[index]._id}`, {
+    method: "DELETE",
+  });
   const result = await resp.json();
   tasks = result.tasks;
-  // localStorage.setItem("tasks", JSON.stringify(tasks));
   render();
 };
 const funcCheck = async (index) => {
   let { _id, isCheck } = tasks[index];
-  isCheck= !isCheck;
+  isCheck = !isCheck;
   const resp = await fetch("http://localhost:8000/patch", {
     method: "PATCH",
     headers: {
@@ -150,11 +141,10 @@ const funcCheck = async (index) => {
     },
     body: JSON.stringify({
       _id,
-      isCheck
+      isCheck,
     }),
   });
   const result = await resp.json();
   tasks = result.tasks;
-  // localStorage.setItem("tasks", JSON.stringify(tasks));
   render();
 };
