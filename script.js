@@ -1,4 +1,3 @@
-// JSON.parse(localStorage.getItem("tasks")) ||
 let tasks = [];
 let button = null;
 let input = null;
@@ -14,7 +13,6 @@ let indexTask = null;
 let indexTask2 = null;
 let count = 0;
 let task = "";
-///
 window.onload = async () => {
   input = document.getElementById("input-task");
   button = document.getElementById("button-task");
