@@ -15,7 +15,6 @@ let indexTask2 = null;
 let count = 0;
 let task = "";
 ///
-
 window.onload = async () => {
   input = document.getElementById("input-task");
   button = document.getElementById("button-task");
@@ -33,7 +32,6 @@ window.onload = async () => {
 const writeTask = async (event) => {
   task = event.target.value;
 };
-
 const addTask = async (event) => {
   if (task.length != 0) {
     const resp = await fetch("http://localhost:8000/post", {
@@ -55,7 +53,6 @@ const addTask = async (event) => {
   // localStorage.setItem("tasks", JSON.stringify(tasks));
   render();
 };
-
 const render = async () => {
   content = document.getElementById("add-tasks");
   while (content.firstChild) {
@@ -104,13 +101,11 @@ const render = async () => {
     // localStorage.setItem("tasks", JSON.stringify(tasks));
   });
 };
-
 const funcEdit = async (event, index) => {
   indexTask = index;
   count++;
   render();
 };
-
 const changeTask = async (event, index) => {
   const { _id } = tasks[index];
   if (event.target.value.length != 0) {
@@ -132,7 +127,6 @@ const changeTask = async (event, index) => {
     render();
   }
 };
-
 const funcDel = async (index) => {
   const resp = await fetch(
     `http://localhost:8000/del?id=${tasks[index]._id}`,
@@ -145,7 +139,6 @@ const funcDel = async (index) => {
   // localStorage.setItem("tasks", JSON.stringify(tasks));
   render();
 };
-
 const funcCheck = async (index) => {
   let { _id, isCheck } = tasks[index];
   isCheck= !isCheck;

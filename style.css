@@ -9,14 +9,12 @@ body {
   background: linear-gradient(to bottom, powderblue, pink);
   background-repeat: no-repeat;
 }
-
 .header {
   font-size: 2rem;
   font-weight: 700;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   color: rgb(13, 0, 59);
 }
-
 .main {
   width: 100%;
   height: auto;
@@ -37,7 +35,6 @@ body {
   background: rgba(255, 255, 255, 0.4);
   border-radius: 10px;
 }
-
 .main button {
   width: 35px;
   height: 35px;
@@ -55,7 +52,6 @@ body {
   margin-right: 0;
   border-radius: 50%;
 }
-
 #add-tasks {
   background-repeat: no-repeat;
   background-color: rgba(255, 255, 255, 0.3);
@@ -71,7 +67,6 @@ body {
   overflow-y: scroll;
   overflow-x: hidden;
 }
-
 ::-webkit-scrollbar{
   background:  rgba(255, 255, 255, 0.1);
   border-radius: 10px;
@@ -80,7 +75,6 @@ body {
   background-color: #fd8ea0a1;
   border-radius: 10px;
 }
-
 p {
   font-size: 1rem;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
@@ -93,7 +87,6 @@ p {
   text-decoration: line-through;
   color: rgb(84, 84, 141);
 }
-
 .task {
   height: 34px;
   width: 100%;
@@ -113,7 +106,6 @@ p {
   background-color: rgba(100, 148, 237, 0.589);
   border-radius: 20px;
 }
-
 .task input[type='text']{
   width: 60%;
   font-size: 1rem;
@@ -128,8 +120,6 @@ p {
   border-radius: 10px;
   overflow: scroll;
 }
-
-
 input[type='checkbox'] {
   cursor: pointer;
   zoom: 1.5;
