@@ -1,4 +1,5 @@
-let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+// JSON.parse(localStorage.getItem("tasks")) || 
+let tasks = [];
 let button = null;
 let input = null;
 let input2 = null;
@@ -18,11 +19,13 @@ let task = "";
 window.onload = async () => {
   input = document.getElementById("input-task");
   button = document.getElementById("button-task");
-  const response = await fetch("http://localhost:8000/allTasks", {
-    method: "GET",
+  const response = await fetch("http://localhost:8000/get", {
+    method: "GET"
   });
+  // console.log(response);
   const result = await response.json();
-  tasks = result.data;
+  tasks = result.tasks;
+  // console.log(result.tasks);
   input.addEventListener("change", writeTask);
   button.addEventListener("click", addTask);
   render();
@@ -33,7 +36,7 @@ const writeTask = async (event) => {
 
 const addTask = async (event) => {
   if (task.length != 0) {
-    const resp = await fetch("http://localhost:8000/createTask", {
+    const resp = await fetch("http://localhost:8000/post", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -41,15 +44,15 @@ const addTask = async (event) => {
       },
       body: JSON.stringify({
         text: task,
-        isCheck: false,
+        isCheck: false
       }),
     });
     const result = await resp.json();
-    tasks = result.data;
+    tasks = result.tasks;
     task = "";
     input.value = "";
   }
-  localStorage.setItem("tasks", JSON.stringify(tasks));
+  // localStorage.setItem("tasks", JSON.stringify(tasks));
   render();
 };
 
@@ -98,7 +101,7 @@ const render = async () => {
     container.appendChild(div);
     content.appendChild(container);
     imgEdit.addEventListener("click", (e) => funcEdit(e, index));
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    // localStorage.setItem("tasks", JSON.stringify(tasks));
   });
 };
 
@@ -109,55 +112,56 @@ const funcEdit = async (event, index) => {
 };
 
 const changeTask = async (event, index) => {
-  const { id } = tasks[index];
+  const { _id } = tasks[index];
   if (event.target.value.length != 0) {
-    const resp = await fetch("http://localhost:8000/updateTask", {
+    const resp = await fetch("http://localhost:8000/patch", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
         "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({
-        id,
-        text: event.target.value,
+        _id,
+        text: event.target.value
       }),
     });
     const result = await resp.json();
-    tasks = result.data;
+    tasks = result.tasks;
     indexTask2 = null;
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    // localStorage.setItem("tasks", JSON.stringify(tasks));
     render();
   }
 };
 
 const funcDel = async (index) => {
   const resp = await fetch(
-    `http://localhost:8000/deleteTask?id=${tasks[index].id}`,
+    `http://localhost:8000/del?id=${tasks[index]._id}`,
     {
       method: "DELETE",
     }
   );
   const result = await resp.json();
-  tasks = result.data;
-  localStorage.setItem("tasks", JSON.stringify(tasks));
+  tasks = result.tasks;
+  // localStorage.setItem("tasks", JSON.stringify(tasks));
   render();
 };
 
 const funcCheck = async (index) => {
-  const { id, isCheck } = tasks[index];
-  const resp = await fetch("http://localhost:8000/updateTask", {
+  let { _id, isCheck } = tasks[index];
+  isCheck= !isCheck;
+  const resp = await fetch("http://localhost:8000/patch", {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
       "Access-Control-Allow-Origin": "*",
     },
     body: JSON.stringify({
-      id,
-      isCheck: !isCheck,
+      _id,
+      isCheck
     }),
   });
   const result = await resp.json();
-  tasks = result.data;
-  localStorage.setItem("tasks", JSON.stringify(tasks));
+  tasks = result.tasks;
+  // localStorage.setItem("tasks", JSON.stringify(tasks));
   render();
 };

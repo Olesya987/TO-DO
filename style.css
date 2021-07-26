@@ -69,6 +69,7 @@ body {
   justify-content: flex-start;
   padding: 10px;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar{
